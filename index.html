@@ -481,9 +481,7 @@ function renderList(){
       </div>
     </div>`;
   }).join('');
-  window._terraData=window._terraData||{}; window._terraData[id]={results,lat,lon};
-  if(results.length>=n) list.innerHTML+=`<div class="pt-more" onclick="openTerraModal('${id}')">{1F4CB} Voir les ${results.length} résultats complets</div>`;
-}
+}  
 
 function renderStats(){
   const negoces=filtered.filter(p=>p.groupement!=='Terrassier TP').length;
