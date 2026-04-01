@@ -316,7 +316,7 @@ function refreshTerra(id,lat,lon){
   }
   const PRIO_COLOR={'20t+':'#dc2626','10t-20t':'#ea580c','5t-10t':'#6b7280'};
   list.innerHTML=results.map(t=>`
-    <div class="pt-item" onclick="if(${t.lat})map.setView([${t.lat},${t.lon}],14)" style="cursor:pointer" title="${t.n}">
+    <div class="pt-item" onclick="map.closePopup();if(${t.lat})map.setView([${t.lat},${t.lon}],14)" style="cursor:pointer" title="${t.n}">
       <span class="pt-prio" style="background:${PRIO_COLOR[t.t]||'#6b7280'}">${t.t||'?'}</span>
       <span class="pt-nom">${t.n}</span>
       <span class="pt-loc">${t.d} · ${t.dist.toFixed(1)} km</span>
