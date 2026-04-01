@@ -110,7 +110,7 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);colo
 .pt-prio{display:inline-flex;align-items:center;height:15px;padding:0 5px;border-radius:3px;font-size:9px;font-weight:700;color:white;flex-shrink:0;white-space:nowrap}
 .pt-nom{font-size:12px;font-weight:600;color:var(--text);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pt-loc{font-size:10px;color:var(--muted);white-space:nowrap}
-.pt-empty{font-size:12px;color:var(--muted);font-style:italic;padding:4px 0}
+.pt-more{padding:7px 14px;font-size:11px;font-weight:600;color:#2563eb;cursor:pointer;text-align:center;border-top:1px solid #e8e4dc;margin-top:2px}.pt-more:hover{background:#eff6ff}.pt-empty{font-size:12px;color:var(--muted);font-style:italic;padding:4px 0}
 
 /* TOOLTIP */
 .rtt{background:rgba(26,25,22,.88)!important;color:white!important;padding:6px 10px!important;border-radius:7px!important;font-family:'DM Sans',sans-serif!important;font-size:12px!important;font-weight:500!important;border:none!important;box-shadow:0 3px 10px rgba(0,0,0,.2)!important;white-space:nowrap!important}
@@ -316,10 +316,10 @@ function refreshTerra(id,lat,lon){
   }
   const PRIO_COLOR={'20t+':'#dc2626','10t-20t':'#ea580c','5t-10t':'#6b7280'};
   list.innerHTML=results.map(t=>`
-    <div class="pt-item">
+    <div class="pt-item" onclick="if(${t.lat})map.setView([${t.lat},${t.lon}],14)" style="cursor:pointer" title="${t.n}">
       <span class="pt-prio" style="background:${PRIO_COLOR[t.t]||'#6b7280'}">${t.t||'?'}</span>
       <span class="pt-nom">${t.n}</span>
-      <span class="pt-loc">${t.c} (${t.d}) · ${t.dist.toFixed(1)} km</span>
+      <span class="pt-loc">${t.d} · ${t.dist.toFixed(1)} km</span>
     </div>`).join('');
 }
 
@@ -382,7 +382,7 @@ function buildPopup(p){
       if(c.email) btns+=`<a href="mailto:${c.email}" class="cb em">✉ ${c.email}</a>`;
       if(c.mobile) btns+=`<a href="tel:${c.mobile.replace(/\s/g,'')}" class="cb tl">📞 ${c.mobile}</a>`;
       return `<div class="cc"><div class="cc-name">${name}</div>${role}${btns?`<div class="ca">${btns}</div>`:''}</div>`;
-    }).join('');
+    }).join('');\n  window._terraData=window._terraData||{}; window._terraData[id]={results,lat,lon};\n  if(results.length>=n) list.innerHTML+=`<div class="pt-more" onclick="openTerraModal('${id}')">📋 Voir les ${results.length} résultats complets</div>`;
     cHtml=`<div class="pc"><div class="pc-title">Contacts (${p.contacts.length})</div>${cards}</div>`;
   } else {
     cHtml=`<div class="pnc">Aucun contact identifié</div>`;
@@ -478,7 +478,7 @@ function renderList(){
         ${hasC?`<span class="badge-ct">👤${p.contacts.length}</span>`:''}
       </div>
     </div>`;
-  }).join('');
+  }).join('');\n  window._terraData=window._terraData||{}; window._terraData[id]={results,lat,lon};\n  if(results.length>=n) list.innerHTML+=`<div class="pt-more" onclick="openTerraModal('${id}')">📋 Voir les ${results.length} résultats complets</div>`;
 }
 
 function renderStats(){
@@ -622,5 +622,5 @@ function toggleFilters(){
   applyFilters();
 })();
 </script>
-</body>
+<div id="terra-modal" style="display:none"></div></body>
 </html>
