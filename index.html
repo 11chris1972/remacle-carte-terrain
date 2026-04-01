@@ -310,6 +310,7 @@ function refreshTerra(id,lat,lon){
   const list=document.getElementById('ptl-'+id);
   if(!list) return;
   const results=getNearbyTerra(lat,lon,r,n);
+    window._terraData=window._terraData||{}; window._terraData[id]={results,lat,lon};
   if(!results.length){
     list.innerHTML='<div class="pt-empty">Aucun terrassier dans ce rayon</div>';
     return;
@@ -321,6 +322,7 @@ function refreshTerra(id,lat,lon){
       <span class="pt-nom">${t.n}</span>
       <span class="pt-loc">${t.d} · ${t.dist.toFixed(1)} km</span>
     </div>`).join('');
+      if(results.length>=n) list.innerHTML+=`<div class="pt-more" onclick="openTerraModal('${id}')">📋 Voir les ${results.length} résultats complets</div>`;
 }
 
 function gc(grp){ return GRP_COLORS[grp] || '#6b7280'; }
@@ -383,8 +385,6 @@ function buildPopup(p){
       if(c.mobile) btns+=`<a href="tel:${c.mobile.replace(/\s/g,'')}" class="cb tl">{1F4DE} ${c.mobile}</a>`;
       return `<div class="cc"><div class="cc-name">${name}</div>${role}${btns?`<div class="ca">${btns}</div>`:''}</div>`;
     }).join('');
-  window._terraData=window._terraData||{}; window._terraData[id]={results,lat,lon};
-  if(results.length>=n) list.innerHTML+=`<div class="pt-more" onclick="openTerraModal('${id}')">{1F4CB} Voir les ${results.length} résultats complets</div>`;
     cHtml=`<div class="pc"><div class="pc-title">Contacts (${p.contacts.length})</div>${cards}</div>`;
   } else {
     cHtml=`<div class="pnc">Aucun contact identifié</div>`;
