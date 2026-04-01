@@ -380,9 +380,9 @@ function buildPopup(p){
       const role=c.role?`<div class="cc-role">${c.role}</div>`:'';
       let btns='';
       if(c.email) btns+=`<a href="mailto:${c.email}" class="cb em">✉ ${c.email}</a>`;
-      if(c.mobile) btns+=`<a href="tel:${c.mobile.replace(/\s/g,'')}" class="cb tl">📞 ${c.mobile}</a>`;
+      if(c.mobile) btns+=`<a href="tel:${c.mobile.replace(/\s/g,'')}" class="cb tl">{1F4DE} ${c.mobile}</a>`;
       return `<div class="cc"><div class="cc-name">${name}</div>${role}${btns?`<div class="ca">${btns}</div>`:''}</div>`;
-    }).join('');\n  window._terraData=window._terraData||{}; window._terraData[id]={results,lat,lon};\n  if(results.length>=n) list.innerHTML+=`<div class="pt-more" onclick="openTerraModal('${id}')">📋 Voir les ${results.length} résultats complets</div>`;
+    }).join('');\n  window._terraData=window._terraData||{}; window._terraData[id]={results,lat,lon};\n  if(results.length>=n) list.innerHTML+=`<div class="pt-more" onclick="openTerraModal('${id}')">{1F4CB} Voir les ${results.length} résultats complets</div>`;
     cHtml=`<div class="pc"><div class="pc-title">Contacts (${p.contacts.length})</div>${cards}</div>`;
   } else {
     cHtml=`<div class="pnc">Aucun contact identifié</div>`;
@@ -400,7 +400,7 @@ function buildPopup(p){
     const pid = p.id.replace(/[^a-z0-9]/gi,'_');
     terraHtml = `<div class="pt">
       <div class="pt-header">
-        <span class="pt-title">🏗 Terrassiers à proximité</span>
+        <span class="pt-title">{1F3D7} Terrassiers à proximité</span>
         <span class="pt-badge">${count}</span>
         <select class="pt-radius" onchange="updateTerra('${pid}',this.value,${p.lat},${p.lon})" id="ptr_${pid}">
           <option value="10">10 km</option>
@@ -420,7 +420,7 @@ function buildPopup(p){
         ${ensBadge}
       </div>
       <div class="ph-name">${p.nom}</div>
-      <div class="ph-loc">📍 ${p.cp||''} ${p.ville||''} ${p.dept?'('+p.dept+')':''}</div>
+      <div class="ph-loc">{1F4CD} ${p.cp||''} ${p.ville||''} ${p.dept?'('+p.dept+')':''}</div>
     </div>
     ${cHtml}
     ${terraHtml}
@@ -431,7 +431,7 @@ function buildTooltip(p){
   const color=gc(p.groupement);
   const showEns=p.enseigne&&p.enseigne!=='—'&&p.enseigne!==p.groupement;
   const ens=showEns?` <span style="opacity:.75">/ ${p.enseigne}</span>`:'';
-  const ct=p.contacts&&p.contacts.length>0?` <span style="color:#86efac">· 👤${p.contacts.length}</span>`:'';
+  const ct=p.contacts&&p.contacts.length>0?` <span style="color:#86efac">· {1F464}${p.contacts.length}</span>`:'';
   return `<span style="color:${color};font-weight:700">${p.groupement}</span>${ens} — ${p.nom}${ct}`;
 }
 
@@ -475,10 +475,10 @@ function renderList(){
         <span class="badge-grp" style="background:${color}">${p.groupement}</span>
         ${ensBadge}
         <span class="pdv-loc">${p.cp||''} ${p.ville||''}</span>
-        ${hasC?`<span class="badge-ct">👤${p.contacts.length}</span>`:''}
+        ${hasC?`<span class="badge-ct">{1F464}${p.contacts.length}</span>`:''}
       </div>
     </div>`;
-  }).join('');\n  window._terraData=window._terraData||{}; window._terraData[id]={results,lat,lon};\n  if(results.length>=n) list.innerHTML+=`<div class="pt-more" onclick="openTerraModal('${id}')">📋 Voir les ${results.length} résultats complets</div>`;
+  }).join('');\n  window._terraData=window._terraData||{}; window._terraData[id]={results,lat,lon};\n  if(results.length>=n) list.innerHTML+=`<div class="pt-more" onclick="openTerraModal('${id}')">{1F4CB} Voir les ${results.length} résultats complets</div>`;
 }
 
 function renderStats(){
