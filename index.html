@@ -382,7 +382,9 @@ function buildPopup(p){
       if(c.email) btns+=`<a href="mailto:${c.email}" class="cb em">✉ ${c.email}</a>`;
       if(c.mobile) btns+=`<a href="tel:${c.mobile.replace(/\s/g,'')}" class="cb tl">{1F4DE} ${c.mobile}</a>`;
       return `<div class="cc"><div class="cc-name">${name}</div>${role}${btns?`<div class="ca">${btns}</div>`:''}</div>`;
-    }).join('');\n  window._terraData=window._terraData||{}; window._terraData[id]={results,lat,lon};\n  if(results.length>=n) list.innerHTML+=`<div class="pt-more" onclick="openTerraModal('${id}')">{1F4CB} Voir les ${results.length} résultats complets</div>`;
+    }).join('');
+  window._terraData=window._terraData||{}; window._terraData[id]={results,lat,lon};
+  if(results.length>=n) list.innerHTML+=`<div class="pt-more" onclick="openTerraModal('${id}')">{1F4CB} Voir les ${results.length} résultats complets</div>`;
     cHtml=`<div class="pc"><div class="pc-title">Contacts (${p.contacts.length})</div>${cards}</div>`;
   } else {
     cHtml=`<div class="pnc">Aucun contact identifié</div>`;
@@ -478,7 +480,9 @@ function renderList(){
         ${hasC?`<span class="badge-ct">{1F464}${p.contacts.length}</span>`:''}
       </div>
     </div>`;
-  }).join('');\n  window._terraData=window._terraData||{}; window._terraData[id]={results,lat,lon};\n  if(results.length>=n) list.innerHTML+=`<div class="pt-more" onclick="openTerraModal('${id}')">{1F4CB} Voir les ${results.length} résultats complets</div>`;
+  }).join('');
+  window._terraData=window._terraData||{}; window._terraData[id]={results,lat,lon};
+  if(results.length>=n) list.innerHTML+=`<div class="pt-more" onclick="openTerraModal('${id}')">{1F4CB} Voir les ${results.length} résultats complets</div>`;
 }
 
 function renderStats(){
