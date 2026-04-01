@@ -554,7 +554,7 @@ function setActive(id){
 }
 
 
-// Mobile panel toggle
+// Auto-init on popup open\nmap.on('popupopen', function(e){\n  const content=e.popup.getContent();\n  if(typeof content === 'string'){\n    const m=content.match(/id="pt-([^"]+)"/);\n    if(m){\n      const pdvId=m[1];\n      const pdv=RAW_DATA.find(p=>p.id===pdvId);\n      if(pdv&&pdv.lat&&pdv.lon) setTimeout(()=>refreshTerra(pdvId,pdv.lat,pdv.lon),50);\n    }\n  }\n});\n// Mobile panel toggle
 let mobilePanelOpen = true;
 function toggleMobilePanel(){
   const sidebar = document.getElementById('sidebar');
